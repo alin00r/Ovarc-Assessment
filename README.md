@@ -1,5 +1,6 @@
-#
-
+<p align="center">
+  <img src="ovarc-logo.jpg" alt="Company Logo" width="200"/>
+</p>
 A Node.js/Express backend for managing bookstore inventory through CSV uploads and generating PDF reports.
 
 ## Features
