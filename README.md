@@ -1,4 +1,4 @@
-# Digital Bookstore Inventory & Reporting System
+#
 
 A Node.js/Express backend for managing bookstore inventory through CSV uploads and generating PDF reports.
 
