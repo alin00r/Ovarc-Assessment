@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: bookstore-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bookstore
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d bookstore']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bookstore-network
+
+  # Node.js Backend API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bookstore-api
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: bookstore
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - bookstore-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  bookstore-network:
+    driver: bridge
