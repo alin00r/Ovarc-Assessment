@@ -1,4 +1,5 @@
-#
+<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/debcbba8-fdd4-4928-af69-24bdc5422463" />
+
 
 A Node.js/Express backend for managing bookstore inventory through CSV uploads and generating PDF reports.
 
